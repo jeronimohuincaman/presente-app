@@ -2,13 +2,13 @@ import 'dotenv/config';
 import * as joi from 'joi';
 
 interface EnvVars{
-    PORT: number;
+    PORT_AUTH: number;
     DATABASE_URL:string;
     JWT_SECRET: string;
 }
 
 const envsSchema = joi.object({
-    PORT: joi.number().required(),
+    PORT_AUTH: joi.number().required(),
     DATABASE_URL: joi.string().required(),
     JWT_SECRET: joi.string().required(),
 })
@@ -23,7 +23,7 @@ if(error){
 const EnvVars: EnvVars = value;
 
 export const envs = {
-    port: EnvVars.PORT,
+    port_auth: EnvVars.PORT_AUTH,
     databaseUrl: EnvVars.DATABASE_URL,
     jwtSecret: EnvVars.JWT_SECRET
 }

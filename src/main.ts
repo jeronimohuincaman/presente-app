@@ -11,7 +11,7 @@ async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.TCP /* Transport.TCP */,
     options: {
-      port: envs.port || 3003,
+      port: envs.port_auth || 3003,
     },
   });
 
@@ -22,7 +22,7 @@ async function bootstrap() {
     })
   );
 
-  logger.log(`Insumos Microservice running on port ${envs.port}`);
+  logger.log(`Insumos Microservice running on port ${envs.port_auth}`);
 
 
   await app.listen();
