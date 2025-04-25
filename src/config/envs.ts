@@ -24,6 +24,6 @@ const EnvVars: EnvVars = value;
 
 export const envs = {
     port_auth: EnvVars.PORT_AUTH,
-    databaseUrl: EnvVars.DATABASE_URL_AUTH,
+    databaseUrlAuth: EnvVars.DATABASE_URL_AUTH,
     jwtSecret: EnvVars.JWT_SECRET
 }
