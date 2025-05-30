@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
+import { AsistenciaService } from '../../asistencia.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alta',
@@ -15,7 +17,7 @@ export class AltaPage {
   tipo: string = '';
   ubicacion: any = null;
 
-  constructor() { }
+  constructor(private asistenciaService: AsistenciaService, private navCtrl: NavController) { }
 
   async tomarFotoYUbicacion() {
     try {
@@ -37,17 +39,32 @@ export class AltaPage {
     }
   }
 
-  guardar() {
+  resetForm() {
+    this.fecha = new Date().toISOString();
+    this.observacion = '';
+    this.foto = '';
+    this.tipo = '';
+    this.ubicacion = null;
+    console.log('Formulario reiniciado');
+  }
 
+  guardar() {
     const payload = {
       fecha: this.fecha,
       observacion: this.observacion,
       foto: this.foto,
       tipo: this.tipo,
       ubicacion: this.ubicacion
-    }
+    };
 
-    console.log(payload);
-    // Aquí podrías guardar en un servicio o backend
+    this.asistenciaService.agregarRegistro(payload);
+
+    // Usar animación para ir hacia atrás (derecha a izquierda)
+    this.navCtrl.navigateBack('/tabs/asistencia', {
+      animationDirection: 'back'
+    });
+
+    // Reinicia el formulario
+    this.resetForm();
   }
 }

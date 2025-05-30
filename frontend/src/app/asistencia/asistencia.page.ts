@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { AsistenciaService } from './asistencia.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-asistencia',
@@ -8,14 +9,15 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class AsistenciaPage {
-  registros = [
-    { id: 1, tipo: 'Ingreso', nombre: 'Juan Pérez', fecha: '2025-05-22' },
-    { id: 2, tipo: 'Egreso', nombre: 'Juan Pérez', fecha: '2025-05-22' },
-    { id: 3, tipo: 'Ingreso', nombre: 'Ana Gómez', fecha: '2025-05-21' },
-    { id: 4, tipo: 'Egreso', nombre: 'Ana Gómez', fecha: '2025-05-21' },
-  ];
 
-  constructor(private router: Router) { }
+  registros: any[] = [];
+
+  constructor(private navCtrl: NavController, private asistenciaService: AsistenciaService) { }
+
+  ionViewWillEnter() {
+    this.registros = this.asistenciaService.obtenerRegistros();
+    console.log(this.registros)
+  }
 
   editar(registro: any) {
     console.log('Editar:', registro);
@@ -29,7 +31,9 @@ export class AsistenciaPage {
 
   agregar() {
     console.log('Agregar nuevo registro');
-    this.router.navigate(['/asistencia/alta']);
     // Navegar a formulario vacío o mostrar modal
+    this.navCtrl.navigateBack('/tabs/asistencia/alta', {
+      animationDirection: 'forward'
+    });
   }
 }
