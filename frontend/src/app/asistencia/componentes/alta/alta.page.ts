@@ -11,7 +11,7 @@ import { NavController } from '@ionic/angular';
   standalone: false
 })
 export class AltaPage {
-  fecha: string = new Date().toISOString();
+  fecha: string = new Date().toDateString();
   observacion: string = '';
   foto: string = '';
   tipo: string = '';
