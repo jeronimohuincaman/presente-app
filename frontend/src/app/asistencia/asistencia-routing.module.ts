@@ -7,9 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: AsistenciaPage
-  },  {
+  },
+  {
     path: 'alta',
-    loadChildren: () => import('./componentes/alta/alta.module').then( m => m.AltaPageModule)
+    loadChildren: () => import('./componentes/alta/alta.module').then(m => m.AltaPageModule)
+  }, 
+  {
+    path: 'editar/:id',
+    loadChildren: () => import('./componentes/alta/alta.module').then(m => m.AltaPageModule)
   }
 
 ];
@@ -18,4 +23,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class AsistenciaPageRoutingModule {}
+export class AsistenciaPageRoutingModule { }

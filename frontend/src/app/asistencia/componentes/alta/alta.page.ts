@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { AsistenciaService } from '../../asistencia.service';
 import { NavController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alta',
@@ -10,14 +11,36 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./alta.page.scss'],
   standalone: false
 })
-export class AltaPage {
+export class AltaPage implements OnInit {
   fecha: string = new Date().toDateString();
   observacion: string = '';
   foto: string = '';
   tipo: string = '';
   ubicacion: any = null;
 
-  constructor(private asistenciaService: AsistenciaService, private navCtrl: NavController) { }
+  registro: any = null;
+  id: any = null;
+
+  title: string = 'Nuevo Registro';
+
+  constructor(private route: ActivatedRoute, private asistenciaService: AsistenciaService, private navCtrl: NavController) {
+
+    this.title = this.route.snapshot.paramMap.get('id') ? 'Editar Registro' : 'Nuevo Registro';
+
+  }
+
+  ngOnInit() {
+    this.id = this.route.snapshot.paramMap.get('id');
+    this.registro = this.asistenciaService.obtenerRegistro(this.id); // Implementalo en el service
+
+    if (this.id && this.registro) {
+      this.fecha = this.registro.fecha;
+      this.observacion = this.registro.observacion;
+      this.foto = this.registro.foto;
+      this.tipo = this.registro.tipo;
+      this.ubicacion = this.registro.ubicacion;
+    }
+  }
 
   async tomarFotoYUbicacion() {
     try {
@@ -57,7 +80,12 @@ export class AltaPage {
       ubicacion: this.ubicacion
     };
 
-    this.asistenciaService.agregarRegistro(payload);
+    if (this.registro) {
+      this.asistenciaService.editarRegistro(this.id, payload);
+    } else {
+      this.asistenciaService.agregarRegistro(payload);
+    }
+
 
     // Usar animación para ir hacia atrás (derecha a izquierda)
     this.navCtrl.navigateBack('/tabs/asistencia', {

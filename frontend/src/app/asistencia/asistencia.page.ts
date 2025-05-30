@@ -21,6 +21,15 @@ export class AsistenciaPage {
 
   editar(registro: any) {
     console.log('Editar:', registro);
+
+    const index = this.registros.indexOf(registro);
+    if (index > -1) {
+      // Navegar a formulario vacío o mostrar modal
+      this.navCtrl.navigateForward(`/tabs/asistencia/editar/${index}`, {
+        animationDirection: 'forward'
+      });
+    }
+    this.ionViewWillEnter();
     // Aquí podrías navegar a un formulario con el ID o abrir un modal
   }
 
@@ -34,7 +43,7 @@ export class AsistenciaPage {
   agregar() {
     console.log('Agregar nuevo registro');
     // Navegar a formulario vacío o mostrar modal
-    this.navCtrl.navigateBack('/tabs/asistencia/alta', {
+    this.navCtrl.navigateForward('/tabs/asistencia/alta', {
       animationDirection: 'forward'
     });
   }
