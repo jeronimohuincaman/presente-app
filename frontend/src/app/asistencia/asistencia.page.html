@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let registro of registros" [ngStyle]="{
+    '--background': registro.tipo === 'Ingreso' ? '#e0f7e9' : '#ffebee',
+    '--color': registro.tipo === 'Ingreso' ? '#2e7d32' : '#c62828'
+  }">
+    <ion-card-content class="card-grid">
+      <!-- Columna 1: Cabecera -->
+      <div class="col header">
+        <h3>{{ registro.nombre }}</h3>
+        <small>{{ registro.fecha }}</small> <br />
+        <small>{{ registro.tipo }}</small>
+      </div>
+
+      <!-- Columna 2: Contenido -->
+      <div class="col content">
+        <p>Ingreso a clases</p>
+      </div>
+
+      <!-- Columna 3: Acciones -->
+      <div class="col actions">
+        <ion-button fill="clear" color="primary" (click)="editar(registro)">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="eliminar(registro)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!-- Botón flotante para agregar nuevo -->
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="agregar()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

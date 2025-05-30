@@ -1,0 +1,23 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
+    /* Cabecera | Contenido | Acciones */
+    align-items: center;
+    gap: 1rem;
+}
+
+.col.header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.col.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.col.content, .col.header {
+    text-align: center;
+}

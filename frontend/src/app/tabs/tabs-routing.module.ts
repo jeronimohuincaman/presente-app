@@ -20,6 +20,10 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'asistencia',
+        loadChildren: () => import('../asistencia/asistencia.module').then(m => m.AsistenciaPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/camera',
         pathMatch: 'full',

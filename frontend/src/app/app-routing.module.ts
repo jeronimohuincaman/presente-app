@@ -9,6 +9,10 @@ const routes: Routes = [
   {
     path: 'camera-location',
     loadChildren: () => import('./camera-location/camera-location.module').then( m => m.CameraLocationPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   }
 ];
 @NgModule({
