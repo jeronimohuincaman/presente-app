@@ -16,4 +16,11 @@ export class AsistenciaService {
   obtenerRegistros(): any[] {
     return this.registros;
   }
+
+  eliminarRegistro(registro: any) {
+    const index = this.registros.indexOf(registro);
+    if (index > -1) {
+      this.registros.splice(index, 1);
+    }
+  }
 }

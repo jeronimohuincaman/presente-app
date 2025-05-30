@@ -26,6 +26,8 @@ export class AsistenciaPage {
 
   eliminar(registro: any) {
     console.log('Eliminar:', registro);
+    this.asistenciaService.eliminarRegistro(registro);
+    this.ionViewWillEnter();
     // Aquí podrías mostrar una alerta de confirmación
   }
 
