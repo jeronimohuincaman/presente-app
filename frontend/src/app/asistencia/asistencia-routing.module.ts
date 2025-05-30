@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: AsistenciaPage
+  },  {
+    path: 'alta',
+    loadChildren: () => import('./componentes/alta/alta.module').then( m => m.AltaPageModule)
   }
+
 ];
 
 @NgModule({

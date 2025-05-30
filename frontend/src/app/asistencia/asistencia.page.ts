@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asistencia',
@@ -14,7 +15,7 @@ export class AsistenciaPage {
     { id: 4, tipo: 'Egreso', nombre: 'Ana Gómez', fecha: '2025-05-21' },
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   editar(registro: any) {
     console.log('Editar:', registro);
@@ -28,6 +29,7 @@ export class AsistenciaPage {
 
   agregar() {
     console.log('Agregar nuevo registro');
+    this.router.navigate(['/asistencia/alta']);
     // Navegar a formulario vacío o mostrar modal
   }
 }

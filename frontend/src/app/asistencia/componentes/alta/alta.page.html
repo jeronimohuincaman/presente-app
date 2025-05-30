@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/asistencia"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Alta de Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Fecha</ion-label>
+    <ion-datetime [(ngModel)]="fecha" presentation="date-time"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Tipo</ion-label>
+    <ion-select [(ngModel)]="tipo">
+      <ion-select-option value="Ingreso">Ingreso</ion-select-option>
+      <ion-select-option value="Egreso">Egreso</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Observación</ion-label>
+    <ion-input [(ngModel)]="observacion"></ion-input>
+  </ion-item>
+
+  <ion-item lines="none" *ngIf="foto">
+    <img [src]="foto" style="width: 100%; margin-top: 10px;" />
+  </ion-item>
+
+  <ion-button expand="full" (click)="tomarFotoYUbicacion()">
+    Tomar Foto y Guardar Ubicación
+  </ion-button>
+
+  <ion-button expand="full" color="success" (click)="guardar()">
+    Guardar
+  </ion-button>
+</ion-content>
