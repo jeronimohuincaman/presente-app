@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'app-alta',
   templateUrl: './alta.page.html',
   styleUrls: ['./alta.page.scss'],
-  standalone: false
+  standalone: false,
 })
 export class AltaPage implements OnInit {
   fecha: string = new Date().toDateString();
@@ -23,10 +23,14 @@ export class AltaPage implements OnInit {
 
   title: string = 'Nuevo Registro';
 
-  constructor(private route: ActivatedRoute, private asistenciaService: AsistenciaService, private navCtrl: NavController) {
-
-    this.title = this.route.snapshot.paramMap.get('id') ? 'Editar Registro' : 'Nuevo Registro';
-
+  constructor(
+    private route: ActivatedRoute,
+    private asistenciaService: AsistenciaService,
+    private navCtrl: NavController
+  ) {
+    this.title = this.route.snapshot.paramMap.get('id')
+      ? 'Editar Registro'
+      : 'Nuevo Registro';
   }
 
   ngOnInit() {
@@ -77,7 +81,7 @@ export class AltaPage implements OnInit {
       observacion: this.observacion,
       foto: this.foto,
       tipo: this.tipo,
-      ubicacion: this.ubicacion
+      ubicacion: this.ubicacion,
     };
 
     if (this.registro) {
@@ -86,10 +90,9 @@ export class AltaPage implements OnInit {
       this.asistenciaService.agregarRegistro(payload);
     }
 
-
     // Usar animación para ir hacia atrás (derecha a izquierda)
     this.navCtrl.navigateBack('/tabs/asistencia', {
-      animationDirection: 'back'
+      animationDirection: 'back',
     });
 
     // Reinicia el formulario
