@@ -1,41 +1,31 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
     <ion-title>Asistencia</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card *ngFor="let registro of registros" [ngStyle]="{
-    '--background': registro.tipo === 'Ingreso' ? '#e0f7e9' : '#ffebee',
-    '--color': registro.tipo === 'Ingreso' ? '#2e7d32' : '#c62828'
-  }">
-    <ion-card-content class="card-grid">
-      <!-- Columna 1: Cabecera -->
-      <div class="col header">
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let registro of registros" [class.ingreso]="registro.tipo === 'Ingreso'" [class.egreso]="registro.tipo === 'Egreso'">
+    <ion-card-content class="registro-card-content">
+      <div class="registro-info">
         <h3>{{ registro.nombre }}</h3>
-        <small>{{ registro.fecha }}</small> <br />
-        <small>{{ registro.tipo }}</small>
+        <p class="fecha-tipo">
+          <small>{{ registro.fecha }}</small>
+          <span class="tipo-badge">{{ registro.tipo }}</span> </p>
+        <p class="observacion">{{ registro.observacion }}</p>
       </div>
 
-      <!-- Columna 2: Contenido -->
-      <div class="col content">
-        {{ registro.observacion }}
-      </div>
-
-      <!-- Columna 3: Acciones -->
-      <div class="col actions">
-        <ion-button fill="clear" color="primary" (click)="editar(registro)">
+      <div class="registro-actions">
+        <ion-button fill="clear" color="medium" (click)="editar(registro)" size="small">
           <ion-icon slot="icon-only" name="create-outline"></ion-icon>
         </ion-button>
-        <ion-button fill="clear" color="danger" (click)="eliminar(registro)">
+        <ion-button fill="clear" color="danger" (click)="eliminar(registro)" size="small">
           <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
         </ion-button>
       </div>
     </ion-card-content>
   </ion-card>
 
-
-  <!-- Botón flotante para agregar nuevo -->
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="agregar()">
       <ion-icon name="add"></ion-icon>
