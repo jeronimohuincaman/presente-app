@@ -1,20 +1,55 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/asistencia" text=""></ion-back-button>
+    </ion-buttons>
     <ion-title>Cámara y Ubicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
 
-  <ion-button expand="full" (click)="getLocation()">Obtener Ubicación</ion-button>
-  <div *ngIf="location">
-    <p>Latitud: {{ location.latitude }}</p>
-    <p>Longitud: {{ location.longitude }}</p>
-  </div>
+  <ion-card class="feature-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <ion-icon name="location-outline"></ion-icon>
+        Obtener Ubicación
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+      <ion-button expand="block" color="success" (click)="getLocation()">
+        <ion-icon slot="start" name="map-outline"></ion-icon>
+        Consultar mi Ubicación
+      </ion-button>
+      <div *ngIf="location" class="location-info ion-padding-top">
+        <p><strong>Latitud:</strong> {{ location.latitude | number:'1.6-6' }}</p>
+        <p><strong>Longitud:</strong> {{ location.longitude | number:'1.6-6' }}</p>
+        </div>
+      <ion-text *ngIf="!location" color="medium">
+        <p class="ion-padding-top">Haz clic para obtener tu ubicación actual.</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 
-  <ion-button expand="full" (click)="takePhoto()">Tomar Foto</ion-button>
-  <div *ngIf="photo">
-    <img [src]="photo" style="max-width: 100%;" />
-  </div>
+  <ion-card class="feature-card">
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">
+        <ion-icon name="camera-outline"></ion-icon>
+        Tomar Foto
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="ion-text-center">
+      <ion-button expand="block" color="primary" (click)="takePhoto()">
+        <ion-icon slot="start" name="camera"></ion-icon>
+        Capturar Imagen
+      </ion-button>
+      <div *ngIf="photo" class="photo-preview ion-padding-top">
+        <img [src]="photo" alt="Foto capturada" />
+      </div>
+      <ion-text *ngIf="!photo" color="medium">
+        <p class="ion-padding-top">Toma una foto para subirla.</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
