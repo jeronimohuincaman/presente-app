@@ -1,40 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/asistencia"></ion-back-button>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary"> <ion-buttons slot="start">
+      <ion-back-button defaultHref="/asistencia" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>{{title}}</ion-title>
-  </ion-toolbar>
+    <ion-title>{{ title }}</ion-title> </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-item>
-    <ion-label position="floating">Fecha</ion-label>
-    <ion-datetime [(ngModel)]="fecha" presentation="date-time"></ion-datetime>
+
+  <ion-item class="app-item">
+    <ion-label position="stacked">Fecha</ion-label> <ion-datetime presentation="date-time" [(ngModel)]="fecha"></ion-datetime>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Tipo</ion-label>
-    <ion-select [(ngModel)]="tipo">
+  <ion-item class="app-item">
+    <ion-label position="stacked">Tipo</ion-label>
+    <ion-select interface="popover" [(ngModel)]="tipo">
       <ion-select-option value="Ingreso">Ingreso</ion-select-option>
       <ion-select-option value="Egreso">Egreso</ion-select-option>
     </ion-select>
   </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Observación</ion-label>
-    <ion-input [(ngModel)]="observacion"></ion-input>
+  <ion-item class="app-item">
+    <ion-label position="stacked">Observación</ion-label>
+    <ion-input [(ngModel)]="observacion" placeholder="Añade una descripción (opcional)"></ion-input>
   </ion-item>
 
-  <ion-item lines="none" *ngIf="foto">
-    <img [src]="foto" style="width: 100%; margin-top: 10px;" />
-  </ion-item>
+  <div *ngIf="foto" class="image-preview-container">
+    <img [src]="foto" class="image-preview"/>
+  </div>
 
-  <ion-button expand="full" (click)="tomarFotoYUbicacion()">
-    Tomar Foto y Guardar Ubicación
+  <ion-button
+    expand="block"
+    color="medium" class="ion-margin-top ion-margin-bottom"
+    (click)="tomarFotoYUbicacion()"
+  >
+    <ion-icon slot="start" name="camera-outline"></ion-icon> Tomar Foto y Guardar Ubicación
   </ion-button>
 
-  <ion-button expand="full" color="success" (click)="guardar()">
-    Guardar
+  <ion-button
+    expand="block"
+    color="success"
+    class="ion-margin-bottom"
+    (click)="guardar()"
+  >
+    <ion-icon slot="start" name="save-outline"></ion-icon> Guardar
   </ion-button>
+
 </ion-content>
