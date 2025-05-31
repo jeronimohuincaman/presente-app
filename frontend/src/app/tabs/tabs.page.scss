@@ -1,1 +1,46 @@
+:root {
+  --ion-color-primary: #1a73e8;
+  --ion-color-primary-rgb: 26, 115, 232;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1766cc;
+  --ion-color-primary-tint: #3182eb;
 
+  --ion-color-medium: #606060;
+  --ion-color-medium-rgb: 96, 96, 96;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #545454;
+  --ion-color-medium-tint: #6f6f6f;
+
+  --ion-color-light: #f8f9fa;
+  --ion-color-light-rgb: 248, 249, 250;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #dbe0e3;
+  --ion-color-light-tint: #f9fbff;
+}
+
+ion-tab-bar {
+  height: 64px;
+  --background: #ffffff;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.08);
+  ion-tab-button {
+    --color: var(--ion-color-medium);
+    --color-selected: var(--ion-color-primary);
+
+    ion-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: capitalize;
+      letter-spacing: 0.03em;
+    }
+
+    ion-icon {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    --ripple-color: var(--ion-color-primary-shade);
+  }
+}
