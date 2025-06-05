@@ -15,9 +15,7 @@ const routes: Routes = [
       {
         path: 'camera',
         loadChildren: () =>
-          import('../camera-location/camera-location.module').then(
-            (m) => m.CameraLocationPageModule
-          ),
+          import('../camera-location/camera-location.module').then((m) => m.CameraLocationPageModule),
       },
       {
         path: 'asistencia',
@@ -25,16 +23,16 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs/camera',
+        redirectTo: 'explorer',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/camera',
+    redirectTo: 'tabs',
     pathMatch: 'full',
-  },
+  }
 ];
 
 @NgModule({
