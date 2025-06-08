@@ -8,7 +8,8 @@
 <ion-content class="ion-padding">
 
   <ion-item class="app-item">
-    <ion-label position="stacked">Fecha</ion-label> <ion-datetime presentation="date-time" [(ngModel)]="fecha"></ion-datetime>
+    <ion-label position="stacked">Fecha</ion-label> <ion-datetime presentation="date-time"
+      [(ngModel)]="fecha"></ion-datetime>
   </ion-item>
 
   <ion-item class="app-item">
@@ -25,23 +26,20 @@
   </ion-item>
 
   <div *ngIf="foto" class="image-preview-container">
-    <img [src]="foto" class="image-preview"/>
+    <img [src]="foto" class="image-preview" />
   </div>
 
-  <ion-button
-    expand="block"
-    color="medium" class="ion-margin-top ion-margin-bottom"
-    (click)="tomarFotoYUbicacion()"
-  >
+  <ion-button expand="block" color="medium" class="ion-margin-top ion-margin-bottom" (click)="tomarFotoYUbicacion()">
     <ion-icon slot="start" name="camera-outline"></ion-icon> Tomar Foto y Guardar Ubicación
   </ion-button>
 
-  <ion-button
-    expand="block"
-    color="success"
-    class="ion-margin-bottom"
-    (click)="guardar()"
-  >
+  <ion-button fill="clear" size="small" color="primary" *ngIf="ubicacion"
+    [href]="'https://www.google.com/maps?q=' + ubicacion.latitude + ',' + ubicacion.longitude" target="_blank">
+    <ion-icon slot="start" name="location-outline"></ion-icon>
+    Ver tu Ubicación en el mapa
+  </ion-button>
+
+  <ion-button [disabled]="!ubicacion" expand="block" color="success" class="ion-margin-bottom" (click)="guardar()">
     <ion-icon slot="start" name="save-outline"></ion-icon> Guardar
   </ion-button>
 
