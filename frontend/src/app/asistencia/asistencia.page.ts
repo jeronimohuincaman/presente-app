@@ -25,7 +25,7 @@ export class AsistenciaPage {
     const index = this.registros.indexOf(registro);
     if (index > -1) {
       // Navegar a formulario vacío o mostrar modal
-      this.navCtrl.navigateForward(`/tabs/asistencia/editar/${index}`, {
+      this.navCtrl.navigateForward(`/asistencia/editar/${index}`, {
         animationDirection: 'forward'
       });
     }
@@ -43,7 +43,7 @@ export class AsistenciaPage {
   agregar() {
     console.log('Agregar nuevo registro');
     // Navegar a formulario vacío o mostrar modal
-    this.navCtrl.navigateForward('/tabs/asistencia/alta', {
+    this.navCtrl.navigateForward('/asistencia/alta', {
       animationDirection: 'forward'
     });
   }
