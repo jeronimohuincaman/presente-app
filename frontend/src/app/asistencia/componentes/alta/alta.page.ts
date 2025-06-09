@@ -4,6 +4,8 @@ import { Geolocation } from '@capacitor/geolocation';
 import { AsistenciaService } from '../../asistencia.service';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { booleanPointInPolygon, point } from '@turf/turf';
+import { areaPermitida } from 'src/shared/area-permitida';
 
 @Component({
   selector: 'app-alta',
@@ -58,13 +60,30 @@ export class AltaPage implements OnInit {
       this.foto = image.dataUrl || '';
 
       const coords = await Geolocation.getCurrentPosition();
-      this.ubicacion = coords.coords;
+      this.ubicacion = await this.verificarUbicacion(coords.coords);
 
       console.log('Foto tomada y ubicación guardada');
     } catch (error) {
       console.error('Error al capturar', error);
     }
   }
+
+  async verificarUbicacion(coords: any) {
+    const ubicacion = coords; // { lat, lng }
+
+    const puntoUsuario = point([ubicacion.latitude, ubicacion.longitude]);
+
+    const estaDentro = booleanPointInPolygon(puntoUsuario, areaPermitida);
+
+    if (estaDentro) {
+      console.log('✅ Estás dentro del área válida');
+      return ubicacion;
+    } else {
+      console.log('❌ Estás fuera del área permitida');
+      return null;
+    }
+  }
+
 
   resetForm() {
     this.fecha = new Date().toISOString();
