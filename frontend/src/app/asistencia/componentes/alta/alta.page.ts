@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { AsistenciaService } from '../../asistencia.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { booleanPointInPolygon, point } from '@turf/turf';
 import { areaPermitida } from 'src/shared/area-permitida';
@@ -28,7 +28,8 @@ export class AltaPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private asistenciaService: AsistenciaService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private toastController: ToastController
   ) {
     this.title = this.route.snapshot.paramMap.get('id')
       ? 'Editar Registro'
@@ -77,9 +78,11 @@ export class AltaPage implements OnInit {
 
     if (estaDentro) {
       console.log('✅ Estás dentro del área válida');
+      this.presentToast('top', 'success', 'Ubicación verificada correctamente', 1500);
       return ubicacion;
     } else {
       console.log('❌ Estás fuera del área permitida');
+      this.presentToast('top', 'danger', 'Ubicación fuera del área permitida', 2000);
       return null;
     }
   }
@@ -116,5 +119,16 @@ export class AltaPage implements OnInit {
 
     // Reinicia el formulario
     this.resetForm();
+  }
+
+  async presentToast(position: 'top' | 'middle' | 'bottom', type: 'success' | 'danger' | 'warning', message: string, duration: number = 1500) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: duration,
+      position: position,
+      color: type
+    });
+
+    await toast.present();
   }
 }
