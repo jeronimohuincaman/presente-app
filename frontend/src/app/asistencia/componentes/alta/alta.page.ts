@@ -14,7 +14,7 @@ import { areaPermitida } from 'src/shared/area-permitida';
   standalone: false,
 })
 export class AltaPage implements OnInit {
-  fecha: string = new Date().toDateString();
+  fecha: string = new Date().toISOString(); // ISO para que lo entienda <ion-datetime>
   observacion: string = '';
   foto: string = '';
   tipo: string = '';
@@ -23,7 +23,7 @@ export class AltaPage implements OnInit {
   registro: any = null;
   id: any = null;
 
-  title: string = 'Nuevo Registro';
+  title: string = '';
 
   constructor(
     private route: ActivatedRoute,

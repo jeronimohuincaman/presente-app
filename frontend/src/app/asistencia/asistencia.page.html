@@ -5,13 +5,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card *ngFor="let registro of registros" [class.ingreso]="registro.tipo === 'Ingreso'" [class.egreso]="registro.tipo === 'Egreso'">
+  <ion-card *ngFor="let registro of registros" [class.ingreso]="registro.tipo === 'Ingreso'"
+    [class.egreso]="registro.tipo === 'Egreso'">
     <ion-card-content class="registro-card-content">
       <div class="registro-info">
         <h3>{{ registro.nombre }}</h3>
         <p class="fecha-tipo">
-          <small>{{ registro.fecha }}</small>
-          <span class="tipo-badge">{{ registro.tipo }}</span> </p>
+          <small>{{ registro.fecha | date:'dd/MM/yyyy HH:mm:ss' }}</small>
+          <span class="tipo-badge">{{ registro.tipo }}</span>
+        </p>
         <p class="observacion">{{ registro.observacion }}</p>
       </div>
 

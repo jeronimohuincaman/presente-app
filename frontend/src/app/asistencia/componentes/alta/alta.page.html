@@ -8,8 +8,12 @@
 <ion-content class="ion-padding">
 
   <ion-item class="app-item">
-    <ion-label position="stacked">Fecha</ion-label> <ion-datetime presentation="date-time"
-      [(ngModel)]="fecha"></ion-datetime>
+    <ion-label position="stacked">Fecha</ion-label>
+    <!-- <ion-datetime presentation="date-time" [(ngModel)]="fecha" [min]="fecha" [max]="fecha" readonly="true">
+    </ion-datetime> -->
+    <ion-text color="medium">
+      <p>{{ fecha | date:'dd/MM/yyyy HH:mm:ss' }}</p>
+    </ion-text>
   </ion-item>
 
   <ion-item class="app-item">
