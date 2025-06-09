@@ -6,6 +6,7 @@ import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { booleanPointInPolygon, point } from '@turf/turf';
 import { areaPermitida } from 'src/shared/area-permitida';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-alta',
@@ -60,8 +61,34 @@ export class AltaPage implements OnInit {
 
       this.foto = image.dataUrl || '';
 
-      const coords = await Geolocation.getCurrentPosition();
-      this.ubicacion = await this.verificarUbicacion(coords.coords);
+      let coords;
+
+      if (Capacitor.isNativePlatform()) {
+        // En móvil: pide permiso y obtiene ubicación con Capacitor
+        const permission = await Geolocation.requestPermissions();
+        if (permission.location === 'granted') {
+          const position = await Geolocation.getCurrentPosition();
+          coords = position.coords;
+        } else {
+          this.presentToast('top', 'danger', 'Permiso de ubicación denegado', 2000);
+          return;
+        }
+      } else {
+        // En web: usa la API nativa del navegador
+        if ('geolocation' in navigator) {
+          coords = await new Promise<GeolocationCoordinates>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(
+              pos => resolve(pos.coords),
+              err => reject(err)
+            );
+          });
+        } else {
+          this.presentToast('top', 'danger', 'Geolocalización no soportada en este navegador', 2000);
+          return;
+        }
+      }
+
+      this.ubicacion = await this.verificarUbicacion(coords);
 
       console.log('Foto tomada y ubicación guardada');
     } catch (error) {
