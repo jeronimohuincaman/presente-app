@@ -47,7 +47,7 @@ ion-header {
       font-size: 1.2rem;
       font-weight: 500;
       letter-spacing: 0.0125em;
-      text-align: start; 
+      text-align: start;
     }
 
     ion-back-button {
@@ -56,8 +56,7 @@ ion-header {
   }
 }
 
-o
-ion-content {
+o ion-content {
   --background: var(--ion-color-light);
   padding: 16px;
 
@@ -76,7 +75,9 @@ ion-content {
       font-size: 0.8rem;
     }
 
-    ion-input, ion-select, ion-datetime {
+    ion-input,
+    ion-select,
+    ion-datetime {
       font-size: 1rem;
       color: var(--ion-color-dark);
       --padding-start: 0;
@@ -84,6 +85,7 @@ ion-content {
       --padding-top: 0;
       --padding-bottom: 0;
     }
+
     --border-width: 0;
   }
 }
@@ -94,7 +96,7 @@ ion-content {
   padding: 8px;
   background: #ffffff;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -123,10 +125,45 @@ ion-button {
   &.ion-margin-top {
     margin-top: 24px !important;
   }
+
   &.ion-margin-bottom {
     margin-bottom: 16px !important;
   }
 }
+
+.ubi-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centra horizontalmente todos los hijos */
+  text-align: center;
+  /* Centra el texto de ion-label */
+}
+
+.ubi-label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  /* Espaciado opcional */
+}
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+  /* Centra horizontalmente el grupo */
+  gap: 1rem;
+  /* Espacio entre radios */
+}
+
+ion-radio-group {
+  display: flex;
+  gap: 1rem;
+  /* Espacio entre cada radio */
+}
+
+ion-radio {
+  margin: 0 2rem;
+}
+
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 

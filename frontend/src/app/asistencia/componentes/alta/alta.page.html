@@ -2,10 +2,20 @@
   <ion-toolbar color="primary"> <ion-buttons slot="start">
       <ion-back-button defaultHref="/asistencia" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ title }}</ion-title> </ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <div class="ubi-container">
+    <ion-label class="ubi-label">Ubicación fisica del edificio</ion-label>
+    <div class="radio-container">
+      <ion-radio-group>
+        <ion-radio value="neuquen" (click)="form_ubi = 'neuquen'">Neuquén</ion-radio>
+        <ion-radio value="cipolletti" (click)="form_ubi = 'cipolletti'">Cipolletti</ion-radio>
+      </ion-radio-group>
+    </div>
+  </div>
 
   <ion-item class="app-item">
     <ion-label position="stacked">Fecha</ion-label>

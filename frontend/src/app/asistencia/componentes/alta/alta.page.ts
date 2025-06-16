@@ -5,7 +5,7 @@ import { AsistenciaService } from '../../asistencia.service';
 import { NavController, ToastController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { booleanPointInPolygon, point } from '@turf/turf';
-import { areaPermitida } from 'src/shared/area-permitida';
+import { areasPermitidas } from 'src/shared/area-permitida';
 import { Capacitor } from '@capacitor/core';
 
 @Component({
@@ -25,6 +25,8 @@ export class AltaPage implements OnInit {
   id: any = null;
 
   title: string = '';
+
+  form_ubi: string = 'neuquen';
 
   constructor(
     private route: ActivatedRoute,
@@ -73,7 +75,7 @@ export class AltaPage implements OnInit {
           timeout: 10000,
           maximumAge: 0
         });
-        
+
         this.ubicacion = await this.verificarUbicacion(coords.coords);
         console.log('Foto tomada y ubicación guardada');
       } else {
@@ -89,6 +91,8 @@ export class AltaPage implements OnInit {
     const ubicacion = coords; // { lat, lng }
 
     const puntoUsuario = point([ubicacion.latitude, ubicacion.longitude]);
+
+    let areaPermitida = this.form_ubi === 'neuquen' ? areasPermitidas.neuquen : areasPermitidas.cipolletti;
 
     const estaDentro = booleanPointInPolygon(puntoUsuario, areaPermitida);
 
@@ -183,5 +187,9 @@ export class AltaPage implements OnInit {
 
     reader.readAsDataURL(file);
   }
+
+toggleUbi(ubi: string) {
+  this.form_ubi = ubi;
+}
 
 }
