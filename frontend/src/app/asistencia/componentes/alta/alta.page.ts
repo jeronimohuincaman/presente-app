@@ -50,8 +50,13 @@ export class AltaPage implements OnInit {
     }
   }
 
-  async tomarFotoYUbicacion() {
+  async tomarFotoYUbicacion(fileInput?: HTMLInputElement) {
     try {
+      if (!Capacitor.isNativePlatform()) {
+        fileInput?.click(); // abre selector de archivos
+        return;
+      }
+
       const image = await Camera.getPhoto({
         quality: 90,
         allowEditing: false,
@@ -61,38 +66,22 @@ export class AltaPage implements OnInit {
 
       this.foto = image.dataUrl || '';
 
-      let coords;
-
-      if (Capacitor.isNativePlatform()) {
-        // En móvil: pide permiso y obtiene ubicación con Capacitor
-        const permission = await Geolocation.requestPermissions();
-        if (permission.location === 'granted') {
-          const position = await Geolocation.getCurrentPosition();
-          coords = position.coords;
-        } else {
-          this.presentToast('top', 'danger', 'Permiso de ubicación denegado', 2000);
-          return;
-        }
+      const permission = await Geolocation.requestPermissions();
+      if (permission.location === 'granted') {
+        const coords = await Geolocation.getCurrentPosition({
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0
+        });
+        
+        this.ubicacion = await this.verificarUbicacion(coords.coords);
+        console.log('Foto tomada y ubicación guardada');
       } else {
-        // En web: usa la API nativa del navegador
-        if ('geolocation' in navigator) {
-          coords = await new Promise<GeolocationCoordinates>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-              pos => resolve(pos.coords),
-              err => reject(err)
-            );
-          });
-        } else {
-          this.presentToast('top', 'danger', 'Geolocalización no soportada en este navegador', 2000);
-          return;
-        }
+        this.presentToast('top', 'danger', 'Permiso de ubicación denegado', 2000);
       }
-
-      this.ubicacion = await this.verificarUbicacion(coords);
-
-      console.log('Foto tomada y ubicación guardada');
     } catch (error) {
       console.error('Error al capturar', error);
+      this.presentToast('top', 'danger', `${error}`, 2000);
     }
   }
 
@@ -158,4 +147,41 @@ export class AltaPage implements OnInit {
 
     await toast.present();
   }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+
+    if (!file) {
+      this.presentToast('top', 'warning', 'No se seleccionó ninguna imagen', 2000);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async () => {
+      this.foto = reader.result as string;
+
+      // Obtener ubicación con API del navegador
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            this.ubicacion = await this.verificarUbicacion({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            });
+            console.log('Foto y ubicación cargadas (web)');
+          },
+          (error) => {
+            console.error('Error obteniendo ubicación', error);
+            this.presentToast('top', 'danger', 'No se pudo obtener ubicación', 2000);
+          }
+        );
+      } else {
+        this.presentToast('top', 'danger', 'Navegador no soporta geolocalización', 2000);
+      }
+    };
+
+    reader.readAsDataURL(file);
+  }
+
 }
