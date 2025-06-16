@@ -133,7 +133,7 @@ export class AltaPage implements OnInit {
     }
 
     // Usar animación para ir hacia atrás (derecha a izquierda)
-    this.navCtrl.navigateBack('/asistencia', {
+    this.navCtrl.navigateBack('tabs/tabs/asistencia', {
       animationDirection: 'back',
     });
 
