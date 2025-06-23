@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">frontend</string>
-    <string name="title_activity_main">frontend</string>
+    <string name="app_name">PresenTrack</string>
+    <string name="title_activity_main">PresenTrack</string>
     <string name="package_name">com.frontend.presenteapp</string>
     <string name="custom_url_scheme">com.frontend.presenteapp</string>
 </resources>
