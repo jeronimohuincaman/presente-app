@@ -19,14 +19,14 @@ Para ejecutar esta aplicación de manera local o en un dispositivo Android, se d
 ```
 
 ```bash
-        git clone https://github.com/jeronimohuincaman/presente-app.git
-        cd frontend
+   git clone https://github.com/jeronimohuincaman/presente-app.git
+   cd frontend
 ```
 ```bash
-        npm install
+   npm install
 ```
 ```bash
-        ionic serve
+   ionic serve
 ```
 ## Autores
 Huincamán Jerónimo Ezequiel y Lucas Martín Di Luca
