@@ -2,15 +2,12 @@
 ### Desarrollo Movil | 3ro Full Stack ITS
  Aplicación de Asistencia con objetivo de consignas de Trabajo practico Integrador de la materia TSDSFS Desarrollo Movil
 
-## Setup
+## Tecnologías utilizadas
 
-a) Clonar repositorio y ejecutar apk-debug.apk
-
-b) Descargar Apk de este enlance:
-
-```url
-https://drive.google.com/file/d/18zschn3zngiMkNnE7umMi3xvJYhuVvIZ/view?usp=sharing
-```
+* Ionic
+* Angular
+* Capacitor
+* Android Studio
 
 ## Autores
 Huincamán Jerónimo Ezequiel y Lucas Martín Di Luca
@@ -20,3 +17,4 @@ Huincamán Jerónimo Ezequiel y Lucas Martín Di Luca
 ## Documentación
 
 - [Video demostración](https://youtu.be/FffzL6XPR60)
+- [Link apk](https://drive.google.com/file/d/18zschn3zngiMkNnE7umMi3xvJYhuVvIZ/view?usp=sharing)
