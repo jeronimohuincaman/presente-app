@@ -9,7 +9,7 @@ a) Clonar repositorio y ejecutar apk-debug.apk
 b) Descargar Apk de este enlance:
 
 ```url
-https://drive.google.com/file/d/1Xh5Onz34AIKZb6gEEEfFPFr6uXAPNtJY/view?usp=drive_link
+https://drive.google.com/file/d/18zschn3zngiMkNnE7umMi3xvJYhuVvIZ/view?usp=sharing
 ```
 
 ## Autores
