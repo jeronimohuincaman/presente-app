@@ -14,22 +14,20 @@
 Para ejecutar esta aplicación de manera local o en un dispositivo Android, se deben seguir los siguientes pasos:
 
 ## Pasos
-    ```bash
-        npm install -g @ionic/cli
-    ```
-    ```bash
+```bash
+  npm install -g @ionic/cli
+```
+
+```bash
         git clone https://github.com/jeronimohuincaman/presente-app.git
         cd frontend
-    ```
-
-    ```bash
+```
+```bash
         npm install
-    ```
-
-    ```bash
+```
+```bash
         ionic serve
-    ```
-
+```
 ## Autores
 Huincamán Jerónimo Ezequiel y Lucas Martín Di Luca
 - [@jeronimohuincaman](https://github.com/jeronimohuincaman)
